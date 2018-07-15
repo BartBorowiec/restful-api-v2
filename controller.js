@@ -11,11 +11,11 @@ exports.showAllMovies = async (req,res) => {
 	        if (a.Title > b.Title) return 1;
 	        return 0;
 	    });
-		return res.json(movies);
     } catch (err) {
     	console.log(err);
     	return res.send(err);
     }
+    res.json(movies);
 }
 
 exports.addMovie = async (req,res) => {
@@ -23,11 +23,11 @@ exports.addMovie = async (req,res) => {
 		const response = await axios.get('http://www.omdbapi.com/?apikey=effdb1e6&t='+req.body.title);
 		const movie = new Movie(response.data);
 		movie.save();
-		return res.json(movie);
 	} catch (err) {
 		console.log(err);
 		return res.send(err);
 	}
+	res.json(movie);
 }
 exports.addComment = async (req,res) => {
 	try {
@@ -35,11 +35,11 @@ exports.addComment = async (req,res) => {
 		if (!movie) return res.send("No such movie");
 		const comment = await Comment.create({text: req.body.text});
 		movie.Comments.push(comment);
-		return res.json(comment);
 	} catch (err) {
 		console.log(err);
 		return res.send(err);
 	}
+	res.json(comment);
 }
 exports.showComments = async (req,res) => {
 	try {
@@ -48,9 +48,9 @@ exports.showComments = async (req,res) => {
 		} else {
 			const comments = await Comment.findById(req.body.movieID);
 		}
-		return res.json(comments);
 	} catch (err) {
 		console.log(err);
 		return res.send(err);
 	}
+	res.json(comments);
 }
