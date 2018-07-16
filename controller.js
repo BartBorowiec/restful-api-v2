@@ -11,11 +11,11 @@ exports.showAllMovies = async (req,res) => {
 			if (a.Title > b.Title) return 1;
 			return 0;
 		});
-    } catch (err) {
-    	console.log(err);
-    	return res.send(err);
-    }
-    res.json(movies);
+	} catch (err) {
+		console.log(err);
+		return res.send(err);
+	}
+	res.json(movies);
 }
 
 exports.addMovie = async (req,res) => {
