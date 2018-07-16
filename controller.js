@@ -7,10 +7,10 @@ exports.showAllMovies = async (req,res) => {
 	try {
 		const movies = await Movie.find({});
 		movies.sort((a,b) => {
-	        if (a.Title < b.Title) return -1;
-	        if (a.Title > b.Title) return 1;
-	        return 0;
-	    });
+			if (a.Title < b.Title) return -1;
+			if (a.Title > b.Title) return 1;
+			return 0;
+		});
     } catch (err) {
     	console.log(err);
     	return res.send(err);
